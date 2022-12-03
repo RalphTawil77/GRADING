@@ -2,6 +2,7 @@ package com.example.FYP.GRADING;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Entity
@@ -10,23 +11,25 @@ public class Group {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long GrpID;
-    private float FinalGrade;
+    private double FinalGrade;
     private String Project_Name;
-//    @OneToMany(cascade=CascadeType.ALL)
-//    @JoinColumn(name = "fk_id",referencedColumnName = "GrpID")
-//    private List<Student> students = new ArrayList<>();
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name = "fk_id",referencedColumnName = "GrpID")
+    private List<Student> students = new ArrayList<>();
 
+    private HashMap<Long, Double> topicgrades = new HashMap<Long,Double>();
     public Group() {
     }
 
-    public Group(Long grpID, float FinalGrade, String Project_Name, List<Student> students) {
+    public Group(Long grpID, String Project_Name, List<Student> students,List<Topic> topics) {
         super();
         this.GrpID = grpID;
-        this.FinalGrade=FinalGrade;
+        this.FinalGrade=0;
         this.Project_Name= Project_Name;
-//        this.students=students;
-
-
+        for (Topic t : topics) {
+            topicgrades.put(t.getTopic_id(), t.getTopic_grade());
+        }
+       this.students=students;
     }
 
     public Long getGrpID() {
@@ -37,12 +40,11 @@ public class Group {
         GrpID = grpID;
     }
 
-    public float getFinalGrade() {
+    public double getFinalGrade() {
+        topicgrades.forEach((k, v)
+                -> FinalGrade+=v);
+        FinalGrade*=5;
         return FinalGrade;
-    }
-
-    public void setFinalGrade(float finalGrade) {
-        FinalGrade = finalGrade;
     }
 
     public String getProject_Name() {
@@ -53,11 +55,11 @@ public class Group {
         Project_Name = project_Name;
     }
 //
-//    public List<Student> getStudents() {
-//        return students;
-//    }
-//
-//    public void setStudents(List<Student> students) {
-//        this.students = students;
-//    }
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
 }

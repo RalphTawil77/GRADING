@@ -70,7 +70,7 @@ public class Topic {
     public double getTopic_grade() {return topic_grade;}
 
     public void calculate_topicgrade() {
-        this.topic_grade = ((E+A+B+D)/16)*getPourcentage();
+        this.topic_grade = ((E+A+B+D)/16)*getPourcentage()*4;
     }
 
     public String getTopic_Name() {
