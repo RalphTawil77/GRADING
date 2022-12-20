@@ -12,11 +12,6 @@ pipeline {
                 bat 'Testing...'
             }
         }
-        stage('build') {
-            steps {
-                bat 'Building...'
-            }
-        }
 
     }
 }
