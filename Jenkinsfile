@@ -7,5 +7,17 @@ pipeline {
                 bat 'echo test'
             }
         }
+        stage('Test') {
+            steps {
+                bat 'Testing...'
+            }
+            }
+        }
+        stage('build') {
+            steps {
+                bat 'Building...'
+            }
+        }
+
     }
 }
