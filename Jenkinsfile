@@ -1,10 +1,10 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
     agent any
-    tools{
-    maven 'maven'
-    jdk 'Jenkin-Java'
-    }
+//     tools{
+//     maven 'maven'
+//     jdk 'Jenkin-Java'
+//     }
     stages {
         stage ('Initialize') {
             steps {
