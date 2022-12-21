@@ -1,10 +1,10 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
     agent any
-//     tools{
-//     maven 'maven'
-//     jdk 'Jenkin-Java'
-//     }
+    tools{
+    maven 'maven'
+    jdk 'Jenkin-Java'
+    }
     stages {
         stage ('Initialize') {
             steps {
@@ -16,7 +16,7 @@ pipeline {
         }
         stage ('Build') {
             steps {
-                bat 'mvn -Dmaven.test.failure.ignore=true install'
+                bat 'mvn install'
             }
             post {
                 success {
