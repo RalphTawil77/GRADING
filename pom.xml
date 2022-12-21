@@ -8,6 +8,7 @@
 		<version>2.7.7-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.example.FYP</groupId>
 	<artifactId>GRADING</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
