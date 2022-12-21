@@ -7,21 +7,22 @@ pipeline {
     }
     stages {
         stage ('Build') {
-        agent {docker { image 'maven:3.3.3'}}
+        agent any
+//         agent {docker { image 'maven:3.3.3'}}
             steps {
                 bat 'echo running build automation...'
 //                 bat 'mvn clean install'
             }
 }
         stage('Unit Tests') {
-        agent {docker { image 'maven:3.3.3'}}
+        agent any
             steps {
                 bat 'echo Unit Tests...'
 //                 bat 'mvn verify -DskipITs=true'
             }
         }
         stage('Integration Tests') {
-        agent {docker { image 'maven:3.3.3'}}
+        agent any
             steps {
                 bat 'echo Integration Test...'
 //                 bat 'mvn verify -DskipUTs=true'
