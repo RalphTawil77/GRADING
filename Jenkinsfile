@@ -6,8 +6,8 @@ pipeline {
     jdk 'Jenkin-Java'
     }
     stages {
-        agent any
         stage ('Initialize') {
+        agent any
             steps {
                 bat '''
                     echo "PATH = ${PATH}"
