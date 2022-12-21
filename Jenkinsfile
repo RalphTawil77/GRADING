@@ -47,7 +47,6 @@ pipeline {
         }}
         }
 
-    }
         post{
             always{
                 mail to: "ralph.tawil@net.usj.edu.lb",
