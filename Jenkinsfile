@@ -22,7 +22,7 @@ pipeline {
                 success {
                     junit 'target/surefire-reports/**/*.xml'
                 }
-            }
+            }}
         stage('Test') {
             steps {
                 bat 'echo Testing...'
