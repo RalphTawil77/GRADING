@@ -7,25 +7,24 @@ pipeline {
     }
     stages {
         stage ('Build') {
-        agent any
-//         agent {docker { image 'maven:3.3.3'}}
+        agent {docker { image 'maven:3.3.3'}}
             steps {
                 bat 'echo running build automation...'
-//                 bat 'mvn clean install'
+                bat 'mvn clean install'
             }
 }
         stage('Unit Tests') {
-        agent any
+        agent {docker { image 'maven:3.3.3'}}
             steps {
                 bat 'echo Unit Tests...'
-//                 bat 'mvn verify -DskipITs=true'
+                bat 'mvn verify -DskipITs=true'
             }
         }
         stage('Integration Tests') {
-        agent any
+        agent {docker { image 'maven:3.3.3'}}
             steps {
                 bat 'echo Integration Test...'
-//                 bat 'mvn verify -DskipUTs=true'
+                bat 'mvn verify -DskipUTs=true'
             }
         }
         stage("Build Docker Image"){
@@ -33,7 +32,7 @@ pipeline {
         steps{
         script{
         bat 'echo Building docker image...'
-//         app = docker.build("ralphtawil/fyp-grading")
+        app = docker.build("ralphtawil/fyp-grading")
         }}
         }
         stage("Push Docker Image"){
@@ -41,17 +40,17 @@ pipeline {
         steps{
         script{
         bat 'echo Pushing docker image...'
-//         docker.withRegistry('http://registry.hub.docker.com','dhcredentials')
-//         app.push("${env.BUILD_NUMBER}")
-//         app.push("latest")}
+        docker.withRegistry('http://registry.hub.docker.com','dhcredentials')
+        app.push("${env.BUILD_NUMBER}")
+        app.push("latest")}
         }}
         }
 
-        post{
-            always{
-                mail to: "ralph.tawil@net.usj.edu.lb",
-                     subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
-                     body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
-            }
-        }
+//         post{
+//             always{
+//                 mail to: "ralph.tawil@net.usj.edu.lb",
+//                      subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
+//                      body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
+//             }
+//         }
 }}
