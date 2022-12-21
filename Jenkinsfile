@@ -7,7 +7,7 @@ pipeline {
     }
     stages {
         stage ('Build') {
-        agent {docker { image 'maven:3.2.1'}}
+        agent {docker { image 'maven:3.3.3'}}
             steps {
                 bat 'mvn install'
             }
