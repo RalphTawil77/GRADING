@@ -1,6 +1,6 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
-    agent any
+    agent none
     tools{
     maven 'maven'
     jdk 'Jenkin-Java'
@@ -15,8 +15,9 @@ pipeline {
 //             }
 //         }
         stage ('Build') {
+        agent {docker { image 'maven:3.3.3'}}
             steps {
-                bat 'mvn -fn install'
+                bat 'mvn install'
             }
             post {
                 success {
