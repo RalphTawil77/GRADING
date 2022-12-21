@@ -41,7 +41,7 @@ pipeline {
         script{
         bat 'echo Pushing docker image...'
         docker.withRegistry('http://registry.hub.docker.com','dhcredentials'){
-        app.push("$(env.BUILD_NUMBER)")
+        app.push("${env.BUILD_NUMBER}")
         app.push("latest")}
         }}
         }
